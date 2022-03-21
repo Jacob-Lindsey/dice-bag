@@ -1,0 +1,58 @@
+.container {
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    padding: 0 0.5rem;
+}
+
+.title {
+    font-size: 1.5rem;
+}
+
+.list {
+    border-radius: 8px;
+    overflow: auto;
+    width: 100%;
+}
+
+.item {
+    background-color: hsl(0, 0%, 95%);
+    display: flex;
+    justify-content: center;
+    padding: 0.5rem 0.25rem;
+}
+
+.item:nth-child(odd) {
+    background-color: hsl(0, 0%, 86%);
+}
+
+.item:nth-child(odd) .sectionTitle {
+    background-color: hsl(0, 0%, 98%);
+}
+
+.dieSection {
+    flex-grow: 1;
+    padding: 0.5rem 1.5%;
+}
+
+.sectionTitle {
+    background-color: hsl(0, 0%, 84%);
+    border-radius: 5px;
+    font-weight: 700;
+    padding: 0 0.5rem;
+}
+
+@media screen and (min-width: 768px) {
+    .item {
+        justify-content: space-evenly;
+    }
+
+    .dieSection {
+        flex-grow: 0;
+        padding: 1rem 0;
+    }
+
+    .sectionTitle {
+        padding: 0.25rem 1.5rem;
+    }
+}

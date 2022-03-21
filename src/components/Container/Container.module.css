@@ -1,0 +1,44 @@
+.container {
+  display: flex;
+  flex-direction: column;
+}
+
+.diceSelect {
+  display: none;
+}
+
+.rollResult {
+  order: 2;
+}
+
+.diceBag {
+
+}
+
+@media screen and (min-width: 768px) {
+  .container {
+    display: grid;
+    grid-template-columns: 1fr minmax(225px, 350px);
+    grid-template-rows: 10em 1fr;
+    gap: 0px 0px;
+    grid-template-areas:
+      "dice-select dice-select"
+      "roll-result dice-bag";
+    margin: 0 auto;
+    max-width: 1920px;
+  }
+
+  .diceSelect {
+    display: inherit;
+  }
+
+  .diceBag, 
+  .rollResult {
+    padding-top: 1.6rem;
+  }
+
+  .diceBag {
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+}
