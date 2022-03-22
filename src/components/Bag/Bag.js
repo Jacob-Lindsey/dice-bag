@@ -1,13 +1,21 @@
-import { useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { GiRollingDices } from "react-icons/gi";
-import { MdModeEdit } from "react-icons/md";
-import { TiMinus, TiPlus } from "react-icons/ti";
+import { IoSaveSharp } from "react-icons/io5";
+import { TiDelete, TiMinus, TiPlus } from "react-icons/ti";
+import rollDice from "../../utils/rollDice";
 import styles from "./Bag.module.css";
 
-const Bag = ({ bag, setBag }) => {
+const Bag = ({ bag, setBag, setResult }) => {
 
-    const [name, setName] = useState();
-    const [editing, setEditing] = useState(false);
+    const [name, setName] = useState('Bag');
+    const [saving, setSaving] = useState(false);
+
+    useEffect(() => {
+        window.addEventListener('keydown', handleKeyboardShortcut, false);
+        return () => { 
+            window.removeEventListener('keydown', handleKeyboardShortcut, false) 
+        };
+    });
 
     const handleDecrement = (die) => {
         const newBag = {...bag};
@@ -23,25 +31,65 @@ const Bag = ({ bag, setBag }) => {
         newBag[die] = newBag[die] + 1;
         setBag(newBag);
     };
-    
+
+    const handleSetToZero = (die) => {
+        const newBag = {...bag};
+        newBag[die] = 0;
+        setBag(newBag);
+    };
+
+    const convertToDiceNotation = () => {
+        let result = {};
+        for (const [key, val] of Object.entries(bag)) {
+            // Builds a slug of die notation (2d10 or 4d20)
+            let slug = val.toString() + key;
+            // Adds to the running total for each ground of die rolls, as well as the grand total
+            for (let i=0; i<val; i++) {
+                let newRoll = rollDice(key);
+                result[slug] = result[slug] ? result[slug] + newRoll : newRoll;
+                result['total'] = result['total'] ? result['total'] + newRoll : newRoll;
+            }
+        }
+        setResult(result);  
+    };
+
+    const handleBagNameChange = (e) => {
+        if (name !== '') {
+            setSaving(false);
+        }
+    };
+
+    const handleKeyboardShortcut = useCallback((event) => {
+        if (event.key === 'Escape') {
+            setSaving(false);
+        }
+    }, [])
     
     return (
         <div className={styles.container}>
 
-            { editing ? 
+            { saving ? 
                 <div className={styles.formContainer}>
                     <div className={styles.formWindow}>
                         <p className={styles.formInfo}>Change the name of the current bag.</p>
                         <div>
                             <input 
                                 className={styles.formInput}
-                                value={name} 
+                                value={name}
+                                onChange={(e) => setName(e.target.value)}
+                                name="bagName"
+                                autoComplete="off"
                             />
                             <div className={styles.buttonContainer}>
-                                <button className={styles.saveButton}>Save Changes</button>
+                                <button
+                                    className={styles.saveButton}
+                                    onClick={handleBagNameChange}
+                                >
+                                    Save Changes
+                                </button>
                                 <button 
                                     className={styles.cancelButton}
-                                    onClick={() => setEditing(false)}
+                                    onClick={() => setSaving(false)}
                                 >
                                     Cancel
                                 </button>
@@ -53,13 +101,16 @@ const Bag = ({ bag, setBag }) => {
                 null 
             }
 
-            <span className={styles.title}>
-                Bag
-                <MdModeEdit 
-                    className={styles.titleIcon}
-                    onClick={() => setEditing(true)}
-                />
-            </span>
+            <div className={styles.title}>
+                {name}
+                    <div 
+                        className={styles.saveWrapper}
+                        onClick={() => setSaving(true)}
+                    >
+                        <IoSaveSharp className={styles.titleIcon} />
+                        <span className={styles.save}>SAVE BAG</span>
+                    </div>
+            </div>
             <ul className={styles.bagList}>
                 {
                     Object.entries(bag).map(([key, value]) =>
@@ -68,18 +119,25 @@ const Bag = ({ bag, setBag }) => {
                             key={key}
                         >
                             <span className={styles.dieLabel}>{key}</span>
-                            <TiMinus className={styles.minusIcon} 
+                            <TiMinus 
+                                className={styles.minusIcon} 
                                 onClick={() => handleDecrement(key)}
                             />
                             <span className={styles.dieCount}>{value}</span>
-                            <TiPlus className={styles.plusIcon} 
+                            <TiPlus 
+                                className={styles.plusIcon} 
                                 onClick={() => handleIncrement(key)}
+                            />
+                            <TiDelete
+                                className={styles.deleteIcon}
+                                onClick={() => handleSetToZero(key)}
                             />
                         </li>
                     )
                 }
                 <button 
                     className={styles.rollButton}
+                    onClick={convertToDiceNotation}
                 >
                     <GiRollingDices className={styles.buttonIcon} />
                     <span className={styles.buttonText}>Roll Dice</span>

@@ -11,12 +11,35 @@
     align-items: center;
     display: flex;
     font-size: 1.5rem;
-    gap: 6px;
+    gap: 12px;
+    justify-content: center;
+    width: 100%;
 }
 
 .titleIcon {
-    cursor: pointer;
+    color: hsl(0, 0%, 97%);
     font-size: 1.25rem;
+}
+
+.saveWrapper {
+    align-items: center;
+    background-color: hsl(240, 73%, 54%);
+    border-radius: 4px;
+    color: hsl(0, 0%, 100%);
+    cursor: pointer;
+    display: flex;
+    gap: 6px;
+    padding: 0.25rem 0.5rem;
+    transition: all 0.2s ease;
+}
+
+.saveWrapper:hover {
+    background-color: hsl(240, 73%, 64%);
+}
+
+.save {
+    font-size: 0.9rem;
+    font-weight: 600;
 }
 
 .bagList {
@@ -43,18 +66,22 @@
 }
 
 .minusIcon,
-.plusIcon {
+.plusIcon,
+.deleteIcon {
     cursor: pointer;
     font-size: 1.2rem;
-    transition: all 0.2s ease-in-out;
 }
 
 .minusIcon {
-    color: red;
+    color: rgb(70, 147, 248);
 }
 
 .plusIcon {
     color: green;
+}
+
+.deleteIcon {
+    color: red;
 }
 
 .rollButton {

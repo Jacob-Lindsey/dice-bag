@@ -14,6 +14,7 @@ const Container = () => {
         d12: 0,
         d20: 0,
     });
+    const [result, setResult] = useState({});
 
     return (
         <div className={styles.container}>
@@ -24,12 +25,13 @@ const Container = () => {
                 />
             </div>
             <div className={`roll-result ${styles.rollResult}`}>
-                <RollResult />
+                <RollResult result={result} />
             </div>
             <div className={`dice-bag ${styles.diceBag}`}>
                 <Bag 
                     bag={bag}
                     setBag={setBag}
+                    setResult={setResult}
                 />
             </div>
         </div>

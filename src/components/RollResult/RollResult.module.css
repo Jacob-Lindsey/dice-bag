@@ -16,43 +16,63 @@
 }
 
 .item {
-    background-color: hsl(0, 0%, 95%);
+    border-radius: 8px;
     display: flex;
     justify-content: center;
     padding: 0.5rem 0.25rem;
 }
 
-.item:nth-child(odd) {
-    background-color: hsl(0, 0%, 86%);
+.item:nth-child(odd) .dieSection {
 }
 
-.item:nth-child(odd) .sectionTitle {
-    background-color: hsl(0, 0%, 98%);
+.item:nth-child(even) .dieSection {
 }
 
 .dieSection {
+    background-color: hsl(0, 0%, 94%);
     flex-grow: 1;
-    padding: 0.5rem 1.5%;
+}
+
+.dieSection:nth-child(2) {
+    order: 8;
+}
+
+.dieSection:nth-child(2) .sectionTitle {
+    text-transform: uppercase;
 }
 
 .sectionTitle {
     background-color: hsl(0, 0%, 84%);
-    border-radius: 5px;
+    font-size: 0.9rem;
     font-weight: 700;
     padding: 0 0.5rem;
 }
 
+.sectionTitle,
+.sectionValue {
+    text-align: center;
+}
+
+.sectionValue {
+    font-size: 0.9rem;
+    font-weight: 500;
+}
+
 @media screen and (min-width: 768px) {
     .item {
-        justify-content: space-evenly;
+        
     }
 
     .dieSection {
         flex-grow: 0;
-        padding: 1rem 0;
     }
 
     .sectionTitle {
-        padding: 0.25rem 1.5rem;
+        font-size: 1rem;
+    }
+
+    .sectionTitle,
+    .sectionValue {
+        padding: 0.65rem 1.5rem;
     }
 }
