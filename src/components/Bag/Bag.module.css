@@ -23,7 +23,7 @@
 
 .saveWrapper {
     align-items: center;
-    background-color: hsl(240, 73%, 54%);
+    background-color: var(--secondary-800);
     border-radius: 4px;
     color: hsl(0, 0%, 100%);
     cursor: pointer;
@@ -34,7 +34,7 @@
 }
 
 .saveWrapper:hover {
-    background-color: hsl(240, 73%, 64%);
+    background-color: var(--secondary-600);
 }
 
 .save {
@@ -60,7 +60,7 @@
 }
 
 .dieCount {
-    background-color: hsl(0, 0%, 93%);
+    background-color: var(--main-300);
     border-radius: 5px;
     padding: 0.125rem 1rem;
 }
@@ -73,20 +73,20 @@
 }
 
 .minusIcon {
-    color: rgb(70, 147, 248);
+    color: var(--secondary-400);
 }
 
 .plusIcon {
-    color: green;
+    color: var(--accent-400);
 }
 
 .deleteIcon {
-    color: red;
+    color: rgb(252, 82, 39);
 }
 
 .rollButton {
     align-items: center;
-    background-color: transparent;
+    background-color: var(--accent-500);
     border: 2px solid hsla(0, 0%, 50%, 0.575);
     border-radius: 5px;
     cursor: pointer;
@@ -101,7 +101,7 @@
 }
 
 .rollButton:hover {
-    background-color: hsla(167, 87%, 78%, 0.575);
+    background-color: var(--accent-300);
 }
 
 .buttonIcon {
@@ -112,11 +112,14 @@
 }
 
 .rollButton:hover .buttonIcon {
+    color: var(--main-300);
     right: 72%;
 }
 
 .buttonText {
-
+    color: var(--main-700);
+    font-weight: 600;
+    text-transform: uppercase;
 }
 
 .formContainer {
@@ -129,10 +132,11 @@
     position: fixed;
     top: 0;
     width: 100vw;
+    z-index: 999;
 }
 
 .formWindow {
-    background-color: hsl(0, 0%, 98%);
+    background-color: var(--main-500);
     height: 150px;
     padding: 1rem 2rem 1rem;
     width: 500px;
@@ -144,7 +148,13 @@
 }
 
 .formInput {
-    padding: 0.05rem 0.35rem;
+    background-color: var(--main-300);
+    border: 0;
+    border-radius: 5px;
+    color: white;
+    font-size: 0.9rem;
+    font-weight: 500;
+    padding: 0.25rem 0.35rem;
     width: 100%;
 }
 
@@ -163,7 +173,7 @@
 }
 
 .saveButton {
-    background-color: hsl(120, 68%, 50%);
+    background-color: var(--accent-500);
     border: 1px solid hsl(120, 68%, 30%);
 }
 

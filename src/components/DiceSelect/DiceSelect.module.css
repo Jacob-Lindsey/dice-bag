@@ -7,20 +7,21 @@
 }
 
 .dice {
-    background-color: hsl(0, 0%, 91%);
+    background-color: var(--main-400);
+    border-radius: 4px;
     cursor: pointer;
     padding: 1rem;
     transition: all 0.25s ease;
 }
 
 .dice:hover {
-    background-color: hsl(0, 0%, 83%);
+    background-color: var(--main-300);
 }
 
 @media screen and (min-width: 768px) {
     .diceList {
         display: flex;
-        gap: 2rem;
+        gap: 1.5rem;
         justify-content: center;
         user-select: none;
     }
