@@ -1,5 +1,6 @@
 import { useState } from "react";
 import Bag from "../Bag/Bag";
+import Menu from '../Menu/Menu';
 import DiceSelect from "../DiceSelect/DiceSelect";
 import RollResult from "../RollResult/RollResult";
 import styles from "./Container.module.css";
@@ -18,6 +19,7 @@ const Container = () => {
 
     return (
         <div className={styles.container}>
+            <div className={`header ${styles.menuWrapper}`}><Menu /></div>
             <div className={`dice-select ${styles.diceSelect}`}>
                 <DiceSelect
                     bag={bag}

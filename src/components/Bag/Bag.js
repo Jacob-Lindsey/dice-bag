@@ -39,15 +39,18 @@ const Bag = ({ bag, setBag, setResult }) => {
     };
 
     const convertToDiceNotation = () => {
-        let result = {};
+        let result = {'total':0};
         for (const [key, val] of Object.entries(bag)) {
             // Builds a slug of die notation (2d10 or 4d20)
             let slug = val.toString() + key;
+            if (val === 0) {
+                result[slug] = 0;
+            }
             // Adds to the running total for each ground of die rolls, as well as the grand total
             for (let i=0; i<val; i++) {
                 let newRoll = rollDice(key);
                 result[slug] = result[slug] ? result[slug] + newRoll : newRoll;
-                result['total'] = result['total'] ? result['total'] + newRoll : newRoll;
+                result['total'] = result['total'] + newRoll;
             }
         }
         setResult(result);  

@@ -13,7 +13,6 @@ const RollResult = ({ result }) => {
         <div className={styles.container}>
             <span className={styles.title}>Rolls</span>
             <div className={styles.list}>
-
                 {
                     results ? results.map((res, index) => (
                         <div className={styles.item} key={index}>
@@ -21,7 +20,7 @@ const RollResult = ({ result }) => {
                                 Object.entries(res).map(([k,v]) => 
                                     <div className={styles.dieSection} key={k}>
                                         <div className={styles.sectionTitle}>{k}</div>
-                                        <div className={styles.sectionValue}>{v}</div>
+                                        <div className={`${styles.sectionValue} ${v === 0 ? styles.dim : null}`}>{v}</div>
                                     </div>
                                 )
                             }
@@ -29,8 +28,7 @@ const RollResult = ({ result }) => {
                     ))
                     :
                     null
-                }                
-
+                }
             </div>
         </div>
     )

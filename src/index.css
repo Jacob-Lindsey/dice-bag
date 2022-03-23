@@ -25,6 +25,7 @@ ol[role='list'],
 ul,
 ol {
   list-style: none;
+  margin: 0;
   padding: 0;
 }
 
@@ -69,11 +70,15 @@ body {
   --accent-500: hsl(167, 53%, 51%);
   --accent-600: hsl(167, 44%, 37%);
 
+  --main-200: hsl(222, 18%, 44%);
   --main-300: hsl(222, 16%, 28%);
   --main-400: hsl(222, 17%, 24%);
   --main-500: hsl(222, 21%, 20%);
   --main-600: hsl(226, 22%, 16%);
   --main-700: hsl(222, 21%, 8%);
+
+  --text-disabled: hsl(0, 0%, 69%);
+  --text-invalid: hsl(0, 100%, 50%);
 }
 
 /* A elements that don't have a class get default styles */
@@ -110,6 +115,10 @@ select {
     transition-duration: 0.01ms !important;
     scroll-behavior: auto !important;
   }
+}
+
+.header {
+  grid-area: header;
 }
 
 .dice-select {

@@ -1,0 +1,74 @@
+.container {
+    background-color: var(--main-600);
+    height: 100%;
+    position: relative;
+    user-select: none;
+}
+
+.bagPanel {
+    background: hsl(220, 22%, 8%);
+    left: 0;
+    min-height: 100vh;
+    min-width: 100vw;
+    padding: 2rem 0 1rem;
+    position: fixed;
+    text-align: center;
+    top: 48px;
+    z-index: 999;
+}
+
+.bagItem {
+    cursor: pointer;
+    font-size: 1.75rem;
+    padding: 0.9rem 2.5rem ;
+    transition: all 0.15s ease-in-out;
+}
+
+.menuList {
+    display: flex;
+    height: 100%;
+}
+
+.menuItem {
+    align-items: center;
+    cursor: pointer;
+    display: flex;
+    font-size: 1.5rem;
+    gap: 4px;
+    padding: 0.25rem 1.25rem;
+    transition: 0.2s ease;
+}
+
+.arrow {
+    font-size: 1.2rem;
+}
+
+.bag {
+    font-size: 1.4rem;
+}
+
+.menuLabel {
+    font-size: 0.8rem;
+}
+
+@media screen and (min-width: 768px) {
+    .bagPanel {
+        background: hsl(221, 22%, 20%);
+        background: linear-gradient(180deg, hsl(226, 22%, 16%) 0%, hsl(226, 22%, 16%) 25%, hsl(220, 22%, 8%) 100%);
+        min-height: 500px;
+        min-width: auto;
+        position: absolute;
+    }
+
+    .bagItem {
+        font-size: 1rem;
+    }
+
+    .bagItem:hover {
+        background-color: hsl(227, 23%, 28%);
+    }
+
+    .menuItem:hover {
+        color: var(--accent-300);
+    }
+}
