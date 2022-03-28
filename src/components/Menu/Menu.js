@@ -3,33 +3,34 @@ import { GiSwapBag } from "react-icons/gi";
 import { IoMdArrowDropdown } from "react-icons/io";
 import styles from "./Menu.module.css";
 
-const Menu = () => {
+const Menu = ({ setName, savedBags, setBag }) => {
     
     const [open, setOpen] = useState(false);
+
+    const handleClick = (name, bag) => {
+        setName(name)
+        setBag(bag);
+        setOpen(false);
+    };
 
     return (
         <div className={styles.container}>
             {
                 open ? 
                     <div className={styles.bagPanel}>
-                        <div 
-                            className={styles.bagItem}    
-                            onClick={() => setOpen(false)}
-                        >
-                            BAG 1
-                        </div>
-                        <div 
-                            className={styles.bagItem}    
-                            onClick={() => setOpen(false)}
-                        >
-                            BAG 2
-                        </div>
-                        <div 
-                            className={styles.bagItem}    
-                            onClick={() => setOpen(false)}
-                        >
-                            BAG 3
-                        </div>
+                        {
+                            savedBags ?
+                                Object.entries(savedBags).map(([k,v], index) =>
+                                <div 
+                                    className={styles.bagItem}
+                                    key={`${k}${index}`}
+                                    onClick={() => handleClick(k,v)}
+                                >
+                                    {k}
+                                </div>
+                                )
+                            : <span>You don't have any bags saved currently</span>
+                        }
                     </div>
                 : null
             }

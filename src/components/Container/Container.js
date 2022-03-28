@@ -1,4 +1,5 @@
 import { useState } from "react";
+import useStickyState from "../../utils/useStickyState";
 import Bag from "../Bag/Bag";
 import Menu from '../Menu/Menu';
 import DiceSelect from "../DiceSelect/DiceSelect";
@@ -15,11 +16,19 @@ const Container = () => {
         d12: 0,
         d20: 0,
     });
+    const [savedBags, setSavedBags] = useStickyState({}, 'bags');
+    const [name, setName] = useState('Bag');
     const [result, setResult] = useState({});
 
     return (
         <div className={styles.container}>
-            <div className={`header ${styles.menuWrapper}`}><Menu /></div>
+            <div className={`header ${styles.menuWrapper}`}>
+                <Menu
+                    setName={setName}
+                    savedBags={savedBags}
+                    setBag={setBag}
+                />
+            </div>
             <div className={`dice-select ${styles.diceSelect}`}>
                 <DiceSelect
                     bag={bag}
@@ -30,9 +39,13 @@ const Container = () => {
                 <RollResult result={result} />
             </div>
             <div className={`dice-bag ${styles.diceBag}`}>
-                <Bag 
+                <Bag
+                    name={name}
+                    setName={setName}
                     bag={bag}
                     setBag={setBag}
+                    savedBags={savedBags}
+                    setSavedBags={setSavedBags}
                     setResult={setResult}
                 />
             </div>

@@ -5,9 +5,9 @@ import { TiDelete, TiMinus, TiPlus } from "react-icons/ti";
 import rollDice from "../../utils/rollDice";
 import styles from "./Bag.module.css";
 
-const Bag = ({ bag, setBag, setResult }) => {
+const Bag = ({ name, setName, bag, setBag, savedBags, setSavedBags, setResult }) => {
 
-    const [name, setName] = useState('Bag');
+    const [newName, setNewName] = useState(name);
     const [saving, setSaving] = useState(false);
 
     useEffect(() => {
@@ -56,8 +56,12 @@ const Bag = ({ bag, setBag, setResult }) => {
         setResult(result);  
     };
 
-    const handleBagNameChange = (e) => {
+    const handleSaveBag = (e) => {
         if (name !== '') {
+            setName(newName);
+            let newSavedBags = {...savedBags};
+            newSavedBags[newName] = bag;
+            setSavedBags(newSavedBags);
             setSaving(false);
         }
     };
@@ -78,15 +82,15 @@ const Bag = ({ bag, setBag, setResult }) => {
                         <div>
                             <input 
                                 className={styles.formInput}
-                                value={name}
-                                onChange={(e) => setName(e.target.value)}
+                                value={newName}
+                                onChange={(e) => setNewName(e.target.value)}
                                 name="bagName"
                                 autoComplete="off"
                             />
                             <div className={styles.buttonContainer}>
                                 <button
                                     className={styles.saveButton}
-                                    onClick={handleBagNameChange}
+                                    onClick={handleSaveBag}
                                 >
                                     Save Changes
                                 </button>
@@ -105,14 +109,14 @@ const Bag = ({ bag, setBag, setResult }) => {
             }
 
             <div className={styles.title}>
-                {name}
-                    <div 
-                        className={styles.saveWrapper}
-                        onClick={() => setSaving(true)}
-                    >
-                        <IoSaveSharp className={styles.titleIcon} />
-                        <span className={styles.save}>SAVE BAG</span>
-                    </div>
+                <span className={styles.titleText}>{name}</span>
+                <div 
+                    className={styles.saveWrapper}
+                    onClick={() => setSaving(true)}
+                >
+                    <IoSaveSharp className={styles.titleIcon} />
+                    <span className={styles.save}>SAVE BAG</span>
+                </div>
             </div>
             <ul className={styles.bagList}>
                 {
